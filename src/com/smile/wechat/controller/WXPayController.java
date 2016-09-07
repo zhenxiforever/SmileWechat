@@ -1,4 +1,4 @@
-package com.company.weixin.controller;
+package com.smile.wechat.controller;
 
 import java.beans.IntrospectionException;
 import java.io.BufferedReader;
@@ -21,18 +21,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.company.weixin.help.SystemParameterHelper;
-import com.company.weixin.pojo.PayNotice;
-import com.company.weixin.pojo.WeixinPayRequestDomain;
-import com.company.weixin.service.WXPayService;
-import com.company.weixin.util.JsonUtil;
-import com.company.weixin.util.PropsParam;
-import com.company.weixin.util.PropsUtil;
-import com.company.weixin.util.Result;
-import com.company.weixin.util.SSLNetProvider;
-import com.company.weixin.util.SysConfParam;
-import com.company.weixin.util.UUIDUtil;
-import com.company.weixin.util.WXPayUtil;
+import com.smile.core.helper.SystemParameterHelper;
+import com.smile.core.pojo.Result;
+import com.smile.core.util.PropsUtil;
+import com.smile.core.util.UUIDUtil;
+import com.smile.wechat.model.pojo.PayNotice;
+import com.smile.wechat.model.pojo.WeixinPayRequestDomain;
+import com.smile.wechat.service.WXPayService;
+import com.smile.wechat.util.JsonUtil;
+import com.smile.wechat.util.PropsParam;
+import com.smile.wechat.util.SSLNetProvider;
+import com.smile.wechat.util.SysConfParam;
+import com.smile.wechat.util.WXPayUtil;
 
 /**
  * 微信支付控制器

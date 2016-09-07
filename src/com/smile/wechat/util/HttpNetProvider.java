@@ -1,4 +1,4 @@
-package com.smile.core.util;
+package com.smile.wechat.util;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

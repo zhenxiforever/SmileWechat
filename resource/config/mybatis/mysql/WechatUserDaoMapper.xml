@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bilibala.wechat.dao.WechatUserDao">
+
+	<select id="queryUserByOpenID" resultType="com.bilibala.wechat.model.pojo.User">
+		select * from ${schema}.wechat_user where openid = #{openid}
+	</select>
+	
+	<insert id="saveUser" parameterType="com.bilibala.wechat.model.pojo.User">
+		insert into ${schema}.wechat_user 
+		(id,openid,nickname,groupid,country,province,city,sex,imageurl,issubscribe,
+	    subscribetime,language,qrcodeid,updatetime,accountid,subscribetype)
+	    values (WX_USER_SEQ.nextval,#{user.openid},#{user.nickname:VARCHAR},
+	    #{user.groupid:VARCHAR},#{user.country:VARCHAR},
+	    #{user.province:VARCHAR},#{user.city:VARCHAR},#{user.sex:VARCHAR},
+	    #{user.imageurl:VARCHAR},#{user.issubscribe:VARCHAR},#{user.subscribetime:VARCHAR},
+	    #{user.language:VARCHAR},#{user.qrcodeid:VARCHAR},
+	    sysdate,#{user.accountid:VARCHAR},#{user.subscribetype})
+	</insert>
+	
+	<!-- 修改关注用户信息 -->
+	<update id="updateUser" parameterType="com.bilibala.wechat.model.pojo.User">
+	    update ${schema}.wechat_user set nickname=#{user.nickname:VARCHAR},country=#{user.country:VARCHAR},
+	    province=#{user.province:VARCHAR},city=#{user.city:VARCHAR},
+	    sex=#{user.sex:VARCHAR},imageurl=#{user.imageurl:VARCHAR},
+	    language=#{user.language:VARCHAR},issubscribe=#{user.issubscribe},
+	    subscribetime=#{user.subscribetime},qrcodeid=#{user.qrcodeid:VARCHAR},
+	    updatetime=sysdate,subscribetype=#{user.subscribetype} 
+	    where id=#{user.id}
+	</update>
+	
+	<!-- 修改用户关注标识(1关注 ;-1取消关注) -->
+	<update id="updateSubscribeFlag">
+		update  ${schema}.wechat_user set 
+		issubscribe = #{issubscribe},
+		updatetime=sysdate 
+		where openid = #{openId}
+	</update>
+    
+	<select id="getQrcodeByTicket" resultType="com.bilibala.wechat.model.pojo.Qrcode">        
+		select * from  ${schema}.wechat_qrcode where ticket=#{ticket} and rownum=1 
+	</select>
+	
+</mapper>

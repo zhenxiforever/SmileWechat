@@ -121,7 +121,7 @@
     </tx:advice>  
 	
 	<aop:config>  
-        <aop:pointcut id="txPointcut" expression="execution(* com.company.weixin.service.*Service.*(..))" />  
+        <aop:pointcut id="txPointcut" expression="execution(* com.smile.wechat.service.*Service.*(..))" />  
         <aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut" />  
     </aop:config>
 	
@@ -174,74 +174,74 @@
 	
 		
 	<!-- 服务号 -->
-	<bean id="weixinAccountService" class="com.company.weixin.service.Impl.WeixinAccountServiceImpl">
-		<property name="weixinAccountDao" ref="weixinAccountDao"/>
+	<bean id="wechatAccountService" class="com.smile.wechat.service.impl.WechatAccountServiceImpl">
+		<property name="wechatAccountDao" ref="wechatAccountDao"/>
 	</bean>
-	<bean id="weixinAccountDao" class="org.mybatis.spring.mapper.MapperFactoryBean">        
-		<property name="mapperInterface" value="com.company.weixin.dao.WeixinAccountDao"></property>        
+	<bean id="wechatAccountDao" class="org.mybatis.spring.mapper.MapperFactoryBean">        
+		<property name="mapperInterface" value="com.smile.wechat.dao.WechatAccountDao"></property>        
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>    
 	</bean>	
 		
 	<!-- 自定义菜单 -->
-	<bean id="weixinMenuService" class="com.company.weixin.service.Impl.WeixinMenuServiceImpl">
-		<property name="weixinMenuDao" ref="weixinMenuDao"/>
+	<bean id="wechatMenuService" class="com.smile.wechat.service.impl.WechatMenuServiceImpl">
+		<property name="wechatMenuDao" ref="wechatMenuDao"/>
 	</bean>
-	<bean id="weixinMenuDao" class="org.mybatis.spring.mapper.MapperFactoryBean">        
-		<property name="mapperInterface" value="com.company.weixin.dao.WeixinMenuDao"></property>        
+	<bean id="wechatMenuDao" class="org.mybatis.spring.mapper.MapperFactoryBean">        
+		<property name="mapperInterface" value="com.smile.wechat.dao.WechatMenuDao"></property>        
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>    
 	</bean>
 	
 	<!-- 业务逻辑模块 -->
-	<bean id="wxbModuleService" class="com.company.weixin.service.Impl.WXBModuleServiceImpl">
+	<!-- <bean id="wxbModuleService" class="com.smile.wechat.service.impl.WXBModuleServiceImpl">
 		<property name="wxbModuleDao" ref="wxbModuleDao"/>
 	</bean>
 	<bean id="wxbModuleDao" class="org.mybatis.spring.mapper.MapperFactoryBean">        
-		<property name="mapperInterface" value="com.company.weixin.dao.WXBModuleDao"></property>        
+		<property name="mapperInterface" value="com.smile.wechat.dao.WXBModuleDao"></property>        
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>    
-	</bean>			
+	</bean>	 -->		
 	
 	<!-- 消息日志 -->	
-	<bean id="messageLogService" class="com.company.weixin.service.Impl.MessageLogServiceImpl">
+	<bean id="messageLogService" class="com.smile.wechat.service.impl.MessageLogServiceImpl">
 	    <property name="messageLogDao" ref="messageLogDao"/>
 	</bean>
 	<bean id="messageLogDao" class="org.mybatis.spring.mapper.MapperFactoryBean">        
-		<property name="mapperInterface" value="com.company.weixin.dao.MessageLogDao"></property>        
+		<property name="mapperInterface" value="com.smile.wechat.dao.MessageLogDao"></property>        
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>    
 	</bean>
 	
 	<!-- 系统参数 -->
-	<bean id="sysConfService" class="com.company.weixin.service.Impl.SysConfServiceImpl">
+	<!-- <bean id="sysConfService" class="com.smile.wechat.service.impl.SysConfServiceImpl">
 		<property name="sysConfDao" ref="sysConfDao"/>
 	</bean>
 	<bean id="sysConfDao" class="org.mybatis.spring.mapper.MapperFactoryBean">        
-		<property name="mapperInterface" value="com.company.weixin.dao.SysConfDao"></property>        
+		<property name="mapperInterface" value="com.smile.wechat.dao.SysConfDao"></property>        
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>    
-	</bean>	
+	</bean>	 -->
 	
 	<!-- 微信关注用户 -->
-	<bean id="userService" class="com.company.weixin.service.Impl.UserServiceImpl">
+	<!-- <bean id="userService" class="com.smile.wechat.service.Impl.UserServiceImpl">
 	    <property name="userDao" ref="userDao"/>
 	</bean>
 	<bean id="userDao" class="org.mybatis.spring.mapper.MapperFactoryBean">        
-		<property name="mapperInterface" value="com.company.weixin.dao.UserDao"></property>        
+		<property name="mapperInterface" value="com.smile.wechat.dao.UserDao"></property>        
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>    
-	</bean>
+	</bean> -->
 	
 	<!-- 数据字典 -->
-	<bean id="sysDictService" class="com.company.weixin.service.Impl.SysDictServiceImpl">
+	<!-- <bean id="sysDictService" class="com.smile.wechat.service.Impl.SysDictServiceImpl">
 	    <property name="sysDictDao" ref="sysDictDao"/>
 	</bean>
 	<bean id="sysDictDao" class="org.mybatis.spring.mapper.MapperFactoryBean">        
-		<property name="mapperInterface" value="com.company.weixin.dao.SysDictDao"></property>        
+		<property name="mapperInterface" value="com.smile.wechat.dao.SysDictDao"></property>        
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>    
-	</bean>
+	</bean> -->
 	
 	<!-- 微信支付 -->
-	<bean id="wxPayService" class="com.company.weixin.service.Impl.WXPayServiceImpl">
+	<bean id="wxPayService" class="com.smile.wechat.service.impl.WXPayServiceImpl">
 	    <property name="wxPayDao" ref="wxPayDao"/>
 	</bean>
 	<bean id="wxPayDao" class="org.mybatis.spring.mapper.MapperFactoryBean">        
-		<property name="mapperInterface" value="com.company.weixin.dao.WXPayDao"></property>        
+		<property name="mapperInterface" value="com.smile.wechat.dao.WXPayDao"></property>        
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>    
 	</bean>
 	

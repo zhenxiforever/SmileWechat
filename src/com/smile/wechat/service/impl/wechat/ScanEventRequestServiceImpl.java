@@ -9,6 +9,7 @@ import com.smile.wechat.model.message.request.RequestMessage;
 import com.smile.wechat.model.message.response.ResponseMessage;
 import com.smile.wechat.model.message.response.impl.TextResponseMessage;
 import com.smile.wechat.model.pojo.WechatUser;
+import com.smile.wechat.service.IWechatCommService;
 
 /**
  * 扫一扫 消息对象服务

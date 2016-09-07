@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bilibala.wechat.dao.MessageLogDao">
+
+	<insert id="saveMainMessage" parameterType="com.bilibala.wechat.model.message.Message">
+	    <selectKey keyProperty="id" resultType="int" order="BEFORE">
+    		select  wxb_chat_seq.nextval as id from dual
+  		</selectKey>
+	    insert into  wxb_chat (ID,TOUSERNAME,FromUserName,MsgType,is_user_send,msgId,CreateTime,accountId) values (#{id},#{toUserName},#{fromUserName},#{msgType},#{userSend},#{msgId:VARCHAR},#{createTime},#{accountId})
+	</insert>
+	
+	<insert id="saveTextMessage" parameterType="com.bilibala.wechat.model.message.Message">
+		insert into  wxb_chat_text_msg (chat_id,content) values(#{id},#{content:VARCHAR})
+	</insert>
+
+	
+	<insert id="saveVoiceMessage" parameterType="com.bilibala.wechat.model.message.Message">
+		insert into  wxb_chat_voice_msg (chat_id,mediaId,format,recognition) values(#{id},#{mediaId},#{format},#{recognition:VARCHAR})
+	</insert>
+	
+	<insert id="saveLocationMessage" parameterType="com.bilibala.wechat.model.message.Message">
+		insert into  wxb_chat_location_msg (chat_id,location_x,location_y,scale,label) values(#{id},#{locationX},#{locationY},#{scale},#{label})
+	</insert>
+
+	<insert id="saveImageMessage" parameterType="com.bilibala.wechat.model.message.Message">
+		insert into  wxb_chat_image_msg (chat_id,picUrl,mediaId) values(#{id},#{picUrl},#{mediaId})
+	</insert>
+
+	<insert id="saveVideoMessage" parameterType="com.bilibala.wechat.model.message.Message">
+		insert into  wxb_chat_video_msg (chat_id,mediaId,thumbMediaId) values(#{id},#{mediaId},#{thumbMediaId})
+	</insert>
+		
+	<insert id="saveLinkMessage" parameterType="com.bilibala.wechat.model.message.Message">
+		insert into  wxb_chat_link_msg (chat_id,title,description,url) values(#{id},#{title},#{description},#{url})
+	</insert>
+	
+	<insert id="saveNewsMessage">
+		insert into wxb_chat_news_msg (chat_id,title,description,picurl,url) values (#{message.id},#{data.title},#{data.description:VARCHAR},#{data.picUrl},#{data.url})
+	</insert>	
+		
+	<insert id="saveEventMessage" parameterType="com.bilibala.wechat.model.message.Message">
+		insert into  wxb_chat_event_msg (chat_id,event,eventKey,ticket) values(#{id},#{event},#{eventKey:VARCHAR},#{ticket:VARCHAR})
+	</insert>	
+
+</mapper>

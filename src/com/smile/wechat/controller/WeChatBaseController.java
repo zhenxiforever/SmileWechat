@@ -29,26 +29,33 @@ import org.xml.sax.SAXException;
 
 import com.qq.weixin.mp.aes.AesException;
 import com.qq.weixin.mp.aes.WXBizMsgCrypt;
+import com.smile.core.util.DataDicUtil;
 import com.smile.wechat.model.message.MessageConverter;
 import com.smile.wechat.model.message.request.RequestMessage;
 import com.smile.wechat.model.message.response.ResponseMessage;
 import com.smile.wechat.model.message.response.impl.TextResponseMessage;
+import com.smile.wechat.model.pojo.WechatAccount;
+import com.smile.wechat.service.IWechatAccountService;
 import com.smile.wechat.service.wechat.IRequestDispatchService;
 
 /**
  * 功能：处理微信服务器请求与响应的类
  * 系统核心类
+ * 
+ * @project SmileWechat
+ * @author smile
+ * @createDate 2016年9月7日
  */
 @Controller
-public class WeixinChatController {
+public class WeChatBaseController {
 
-	private static Logger logger = Logger.getLogger(WeixinChatController.class);
+	private static Logger logger = Logger.getLogger(WeChatBaseController.class);
 
 	@Autowired
 	private IRequestDispatchService requestDispatchService;	
 	
 	@Autowired
-	private WeixinAccountService weixinAccountService;		
+	private IWechatAccountService wechatAccountService;		
 
 	/**
 	 * 微信调用doGet接口的校验
@@ -69,9 +76,9 @@ public class WeixinChatController {
 			logger.info("accountId is null,check url has accountId");
 			return;
 		}
-		WeixinAccount account = weixinAccountService.getWeixinAccountById(accountId);
+		WechatAccount account = wechatAccountService.getWechatAccountById(accountId);
 		if(account==null){
-			logger.info("can not get account from table wx_wechat_account where accountId="+accountId);
+			logger.info("can not get account info by accountId="+accountId);
 			return;
 		}		
 		String token = account.getToken();
@@ -111,12 +118,12 @@ public class WeixinChatController {
 			logger.info("accountId is null,check url has accountId");
 			return;
 		}
-		WeixinAccount account = weixinAccountService.getWeixinAccountById(accountId);
+		WechatAccount account = wechatAccountService.getWechatAccountById(accountId);
 		if(account==null){
-			logger.info("can not get account from table wx_wechat_account where accountId="+accountId);
+			logger.info("can not get account info by accountId="+accountId);
 			return;
 		} else {
-			logger.info("get account from table wx_wechat_account where accountId="+accountId);
+			logger.info("get account ["+account.getName()+"] info by "+accountId);
 		}
 		//校验Sha
 		if(!checkSha(request,account.getToken())){
@@ -187,7 +194,7 @@ public class WeixinChatController {
 			logger.error("Exception:", e);
 		}
 		if(!"".equals(responseMessage)){
-			MessageLogHelper.saveMessage(requestMessage, responseMessage);
+//			MessageLogHelper.saveMessage(requestMessage, responseMessage);
 		}
 	}
 	
@@ -272,7 +279,7 @@ public class WeixinChatController {
 	 * @param request
 	 * @return
 	 */
-	public String decryptXml(String xmlstr, HttpServletRequest request,WeixinAccount account){
+	public String decryptXml(String xmlstr, HttpServletRequest request,WechatAccount account){
 		String result = null;
 		try {
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -323,7 +330,7 @@ public class WeixinChatController {
 	 * @param request
 	 * @return
 	 */
-	public String encryptXml(String xmlstr, HttpServletRequest request,WeixinAccount account){
+	public String encryptXml(String xmlstr, HttpServletRequest request,WechatAccount account){
 		String result = null;
 		try {
 			String token = account.getToken();

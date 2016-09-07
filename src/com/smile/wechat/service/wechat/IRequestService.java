@@ -20,6 +20,6 @@ public interface IRequestService {
 	 * @return 响应消息对象
 	 * @throws Exception
 	 */
-	public ResponseMessage handle(HttpServletRequest request,RequestMessage requestMessage)throws Exception;
+	public ResponseMessage handle(HttpServletRequest request,RequestMessage requestMessage) throws Exception;
 
 }

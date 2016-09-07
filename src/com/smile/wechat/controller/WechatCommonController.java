@@ -1,4 +1,4 @@
-package com.company.weixin.controller;
+package com.smile.wechat.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -8,24 +8,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.company.weixin.help.SystemParameterHelper;
-import com.company.weixin.pojo.WeixinAccount;
-import com.company.weixin.service.WeixinAccountService;
-import com.company.weixin.util.AccreditUrlUtil;
-import com.company.weixin.util.JsonUtil;
-import com.company.weixin.util.Result;
-import com.company.weixin.util.SysConfParam;
+import com.smile.core.helper.SystemParameterHelper;
+import com.smile.core.pojo.Result;
+import com.smile.wechat.model.pojo.WechatAccount;
+import com.smile.wechat.service.IWechatAccountService;
+import com.smile.wechat.util.AccreditUrlUtil;
+import com.smile.wechat.util.JsonUtil;
+import com.smile.wechat.util.SysConfParam;
 
 /**
  * 微信服务号控制器
+ * 
+ * @project SmileWechat
+ * @author smile
+ * @createDate 2016年9月7日
  */
 @Controller
-public class WXAccountController {
+public class WechatCommonController {
 	
-	private final static Logger Log = Logger.getLogger(WXAccountController.class);
+	private final static Logger Log = Logger.getLogger(WechatCommonController.class);
 
 	@Autowired
-	private WeixinAccountService weixinAccountService;
+	private IWechatAccountService wechatAccountService;
 
 	/**
 	 * 获取公众账号头像图片地址
@@ -38,7 +42,7 @@ public class WXAccountController {
 		try {
 			String accountid = request.getParameter("accountid");
 
-			WeixinAccount wa = weixinAccountService.getWeixinAccountById(accountid);
+			WechatAccount wa = wechatAccountService.getWechatAccountById(accountid);
 			if (wa != null) {
 				response.getWriter().print(
 						SystemParameterHelper.getValue(SysConfParam.WX_WEB_SERVER_OAUTH_URL)

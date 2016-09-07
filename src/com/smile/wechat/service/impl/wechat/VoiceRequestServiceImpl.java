@@ -4,7 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 
-import com.alibaba.dubbo.common.utils.StringUtils;
+import com.smile.core.util.StringUtils;
 import com.smile.wechat.model.message.request.RequestMessage;
 import com.smile.wechat.model.message.request.impl.VoiceRequestMessage;
 import com.smile.wechat.model.message.response.ResponseMessage;
@@ -26,7 +26,7 @@ public class VoiceRequestServiceImpl extends AbstractRequestService {
 			throws Exception {
 		VoiceRequestMessage voiceRequestMessage = (VoiceRequestMessage) requestMessage;
 		ResponseMessage responseMessage;
-		if (StringUtils.isEmpty(voiceRequestMessage.getRecognition())) {
+		if (StringUtils.isBlankOrEmpty(voiceRequestMessage.getRecognition())) {
 			TextResponseMessage textResponseMessage = new TextResponseMessage(
 					requestMessage);
 			textResponseMessage.setContent("语音消息回复");
