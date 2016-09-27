@@ -13,6 +13,7 @@ import com.smile.wechat.model.message.request.impl.LinkRequestMessage;
 import com.smile.wechat.model.message.request.impl.LocationEventRequestMessage;
 import com.smile.wechat.model.message.request.impl.LocationRequestMessage;
 import com.smile.wechat.model.message.request.impl.ScanEventRequestMessage;
+import com.smile.wechat.model.message.request.impl.ShortvideoRequestMessage;
 import com.smile.wechat.model.message.request.impl.SubscribeEventRequestMessage;
 import com.smile.wechat.model.message.request.impl.TextRequestMessage;
 import com.smile.wechat.model.message.request.impl.VideoRequestMessage;
@@ -75,6 +76,8 @@ public class MessageConverter {
 						returnRequestMessage = new LinkRequestMessage(accountid,doc);
 					}else if(MsgType.equalsIgnoreCase("video")){
 						returnRequestMessage = new VideoRequestMessage(accountid,doc);
+					}else if(MsgType.equalsIgnoreCase("shortvideo")){
+						returnRequestMessage = new ShortvideoRequestMessage(accountid,doc);
 					}
 				
 			}

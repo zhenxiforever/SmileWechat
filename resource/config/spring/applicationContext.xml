@@ -34,7 +34,7 @@
         </property> 
 
         <property name="user"> 
-            <value>${jdbc.user}</value> 
+           <value>${jdbc.user}</value> 
         </property> 
 
         <property name="password"> 
@@ -141,6 +141,7 @@
 				<entry key="shortvideo" value-ref="shortvideoRequestService"/>
 				<entry key="location" value-ref="locationRequestService"/>
 				<entry key="link" value-ref="linkRequestService"/>
+				<entry key="event" value-ref="eventRequestService"/>
 			</map>
 		</property>
 	</bean>
@@ -181,6 +182,10 @@
 		<property name="mapperInterface" value="com.smile.wechat.dao.WechatAccountDao"></property>        
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>    
 	</bean>	
+	<!-- 威信公共服务-->
+	<bean id="WechatCommonServiceImpl" class="com.smile.wechat.service.impl.WechatCommonServiceImpl">
+	</bean>
+
 		
 	<!-- 自定义菜单 -->
 	<bean id="wechatMenuService" class="com.smile.wechat.service.impl.WechatMenuServiceImpl">

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>  
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.bilibala.wechat.dao.WechatUserDao">
+<mapper namespace="com.smile.wechat.dao.WechatUserDao">
 
-	<select id="queryUserByOpenID" resultType="com.bilibala.wechat.model.pojo.User">
+	<select id="queryUserByOpenID" resultType="com.smile.wechat.model.pojo.User">
 		select * from ${schema}.wechat_user where openid = #{openid}
 	</select>
 	
-	<insert id="saveUser" parameterType="com.bilibala.wechat.model.pojo.User">
+	<insert id="saveUser" parameterType="com.smile.wechat.model.pojo.User">
 		insert into ${schema}.wechat_user 
 		(id,openid,nickname,groupid,country,province,city,sex,imageurl,issubscribe,
 	    subscribetime,language,qrcodeid,updatetime,accountid,subscribetype)
@@ -19,7 +19,7 @@
 	</insert>
 	
 	<!-- 修改关注用户信息 -->
-	<update id="updateUser" parameterType="com.bilibala.wechat.model.pojo.User">
+	<update id="updateUser" parameterType="com.smile.wechat.model.pojo.User">
 	    update ${schema}.wechat_user set nickname=#{user.nickname:VARCHAR},country=#{user.country:VARCHAR},
 	    province=#{user.province:VARCHAR},city=#{user.city:VARCHAR},
 	    sex=#{user.sex:VARCHAR},imageurl=#{user.imageurl:VARCHAR},
@@ -37,7 +37,7 @@
 		where openid = #{openId}
 	</update>
     
-	<select id="getQrcodeByTicket" resultType="com.bilibala.wechat.model.pojo.Qrcode">        
+	<select id="getQrcodeByTicket" resultType="com.smile.wechat.model.pojo.Qrcode">        
 		select * from  ${schema}.wechat_qrcode where ticket=#{ticket} and rownum=1 
 	</select>
 	
